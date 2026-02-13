@@ -1,7 +1,23 @@
-import type { NextConfig } from "next";
+/** @type {import('next').NextConfig} */
 
-const nextConfig: NextConfig = {
-  /* config options here */
+const nextConfig = {
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "*",
+      },
+      {
+        protocol: "http",
+        hostname: "*",
+      },
+    ],
+  },
+  webpack: (config: { resolve: { alias: { canvas: boolean; encoding: boolean; }; }; }) => {
+    config.resolve.alias.canvas = false;
+    config.resolve.alias.encoding = false;
+    return config;
+  },
 };
 
-export default nextConfig;
+module.exports = nextConfig;
