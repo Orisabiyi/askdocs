@@ -3,6 +3,7 @@
 import { useTheme } from "next-themes";
 import { Sun, Moon } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Button } from "./ui/button";
 
 export default function ThemeToggle() {
   const { theme, setTheme } = useTheme();
@@ -10,9 +11,9 @@ export default function ThemeToggle() {
   const isDark = theme === "dark";
 
   return (
-    <button
+    <Button
       onClick={() => setTheme(isDark ? "light" : "dark")}
-      className="relative flex h-8 w-8 items-center justify-center rounded-md border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
+      className="relative flex h-8 w-8 items-center justify-center rounded-md border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors bg-transparent"
       aria-label="Toggle theme"
     >
       <AnimatePresence mode="wait">
@@ -38,6 +39,6 @@ export default function ThemeToggle() {
           </motion.div>
         )}
       </AnimatePresence>
-    </button>
+    </Button>
   );
 }
