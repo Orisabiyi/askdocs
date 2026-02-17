@@ -1,10 +1,20 @@
-export interface Citation {
+export interface DocumentCitation {
+  type: "document";
   chunkId: string;
   documentName: string;
   pageNumber: number | null;
   score: number;
   text: string;
 }
+
+export interface WebCitation {
+  type: "web";
+  url: string;
+  sourceName: string;
+  snippet?: string;
+}
+
+export type Citation = DocumentCitation | WebCitation;
 
 export interface ChatMessage {
   id: string;
