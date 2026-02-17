@@ -3,6 +3,7 @@ import prisma from "@/lib/prisma";
 import { retrieveRelevantChunks, buildRAGPrompt } from "@/lib/rag";
 import { geminiChatModel } from "@/lib/gemini";
 import type { Citation } from "@/types/chat";
+import { NextResponse } from "next/server";
 
 // GET - fetch messages for a chat
 export async function GET(
@@ -257,5 +258,39 @@ export async function POST(
     return new Response(JSON.stringify({ error: "Something went wrong" }), {
       status: 500,
     });
+  }
+}
+
+export async function DELETE(
+  _req: Request,
+  { params }: { params: Promise<{ chatId: string }> }
+) {
+  try {
+    const session = await auth();
+    if (!session?.user?.id) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    const { chatId } = await params;
+
+    const chat = await prisma.chat.findUnique({
+      where: { id: chatId },
+    });
+
+    if (!chat || chat.userId !== session.user.id) {
+      return NextResponse.json({ error: "Chat not found" }, { status: 404 });
+    }
+
+    // Delete messages first, then chat
+    await prisma.message.deleteMany({ where: { chatId } });
+    await prisma.chat.delete({ where: { id: chatId } });
+
+    return NextResponse.json({ message: "Chat deleted" });
+  } catch (error) {
+    console.error("Delete chat error:", error);
+    return NextResponse.json(
+      { error: "Something went wrong" },
+      { status: 500 }
+    );
   }
 }
