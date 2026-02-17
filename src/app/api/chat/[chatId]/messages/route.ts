@@ -187,7 +187,7 @@ export async function POST(
               chatId,
               role: "ASSISTANT",
               content: fullResponse,
-              citations: allCitations as any,
+              citations: JSON.parse(JSON.stringify(allCitations)),
             },
           });
 
