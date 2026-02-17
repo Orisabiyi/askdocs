@@ -94,6 +94,9 @@ export async function POST(
     // Retrieve relevant chunks from documents
     const chunks = await retrieveRelevantChunks(content, session.user.id);
 
+    console.log("Retrieved chunks:", chunks.length);
+    console.log("Chunk scores:", chunks.map((c) => ({ name: c.documentName, score: c.score })));
+
     // Build citations
     const citations: Citation[] = chunks.map((chunk) => ({
       type: "document" as const,
@@ -158,16 +161,47 @@ export async function POST(
 
           // Check for web search grounding metadata
           const response = await result.response;
-          const groundingMetadata = response.candidates?.[0]?.groundingMetadata;
+          const candidate = response.candidates?.[0];
+          const groundingMetadata =
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            (candidate as any)?.groundingMetadata;
           const webCitations: Citation[] = [];
 
-          if (groundingMetadata?.groundingChunks) {
-            for (const chunk of groundingMetadata.groundingChunks) {
-              if (chunk.web) {
+          if (groundingMetadata) {
+            // Extract from grounding chunks
+            const chunks = groundingMetadata.groundingChunks || [];
+
+            // Build a map of unique web sources
+            const seen = new Set<string>();
+
+            for (const chunk of chunks) {
+              const web = chunk.web || chunk.retrievedContext;
+              if (web) {
+                const uri = web.uri || web.url || "";
+                const title = web.title || web.displayName || "Web source";
+
+                if (uri && !seen.has(uri)) {
+                  seen.add(uri);
+                  webCitations.push({
+                    type: "web",
+                    url: uri,
+                    sourceName: title,
+                    snippet: "",
+                  });
+                }
+              }
+            }
+
+            // If we got titles but no URLs, try to extract from search queries
+            if (
+              webCitations.length === 0 &&
+              groundingMetadata.webSearchQueries?.length > 0
+            ) {
+              for (const query of groundingMetadata.webSearchQueries) {
                 webCitations.push({
                   type: "web",
-                  url: chunk.web.uri || "",
-                  sourceName: chunk.web.title || "Web source",
+                  url: `https://www.google.com/search?q=${encodeURIComponent(query)}`,
+                  sourceName: query,
                 });
               }
             }

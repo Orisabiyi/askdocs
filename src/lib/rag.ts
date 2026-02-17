@@ -15,7 +15,7 @@ export async function retrieveRelevantChunks(
   query: string,
   userId: string,
   topK: number = 6,
-  minScore: number = 0.7
+  minScore: number = 0.3
 ): Promise<RetrievedChunk[]> {
   // 1. Embed the query
   const queryEmbedding = await generateEmbedding(query);

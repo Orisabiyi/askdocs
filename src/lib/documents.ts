@@ -1,4 +1,4 @@
-import { PDFParse } from "pdf-parse";
+import pdf from "@/lib/pdf-parse";
 import mammoth from "mammoth";
 
 export async function extractText(
@@ -19,12 +19,8 @@ export async function extractText(
 }
 
 async function extractFromPdf(buffer: Buffer) {
-  const parser = new PDFParse({ data: buffer });
-  const result = await parser.getText();
-  const pageCount = result.pages.length;
-  const text = result.pages.map((page) => page.text).join("\n");
-  await parser.destroy();
-  return { text, pageCount };
+  const data = await pdf(buffer);
+  return { text: data.text, pageCount: data.numpages };
 }
 
 async function extractFromDocx(buffer: Buffer) {

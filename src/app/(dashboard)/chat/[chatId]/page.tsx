@@ -27,16 +27,35 @@ export default function ChatPage() {
     async () => { }
   );
 
+  const fetchMessages = async () => {
+    try {
+      const res = await fetch(`/api/chat/${chatId}/messages`);
+      if (res.ok) {
+        return (await res.json()) as Message[];
+      }
+    } catch {
+      console.error("Failed to fetch messages");
+    }
+    return [];
+  };
+
   const sendMessage = async (content: string) => {
-    const userMessage: Message = {
-      id: `temp-${Date.now()}`,
-      role: "USER",
-      content,
-      createdAt: new Date().toISOString(),
-    };
-    setMessages((prev) => [...prev, userMessage]);
     setStreaming(true);
     setStreamingContent("");
+    // Show user message via a pending state, not in messages array
+    setMessages((prev) => {
+      // Remove any previous temp messages
+      const clean = prev.filter((m) => !m.id.startsWith("temp-"));
+      return [
+        ...clean,
+        {
+          id: `temp-user-${Date.now()}`,
+          role: "USER" as const,
+          content,
+          createdAt: new Date().toISOString(),
+        },
+      ];
+    });
 
     try {
       const res = await fetch(`/api/chat/${chatId}/messages`, {
@@ -52,7 +71,6 @@ export default function ChatPage() {
       const reader = res.body.getReader();
       const decoder = new TextDecoder();
       let fullContent = "";
-      let finalCitations: Citation[] = [];
 
       while (true) {
         const { done, value } = await reader.read();
@@ -64,21 +82,14 @@ export default function ChatPage() {
         for (const line of lines) {
           if (!line.startsWith("data: ")) continue;
           const data = line.slice(6);
-
           if (data === "[DONE]") continue;
 
           try {
             const parsed = JSON.parse(data);
-
             if (parsed.text) {
               fullContent += parsed.text;
               setStreamingContent(fullContent);
             }
-
-            if (parsed.citations) {
-              finalCitations = parsed.citations;
-            }
-
             if (parsed.error) {
               console.error("Stream error:", parsed.error);
             }
@@ -88,16 +99,9 @@ export default function ChatPage() {
         }
       }
 
-      setMessages((prev) => [
-        ...prev,
-        {
-          id: `assistant-${Date.now()}`,
-          role: "ASSISTANT",
-          content: fullContent,
-          citations: finalCitations,
-          createdAt: new Date().toISOString(),
-        },
-      ]);
+      // Replace with authoritative server data
+      const serverMessages = await fetchMessages();
+      setMessages(serverMessages);
     } catch (error) {
       console.error("Send message error:", error);
     } finally {
@@ -108,33 +112,27 @@ export default function ChatPage() {
 
   sendMessageRef.current = sendMessage;
 
+  // Initial load + auto-send from ?q= param
   useEffect(() => {
     let didSend = false;
 
     const init = async () => {
       setLoading(true);
-      try {
-        const res = await fetch(`/api/chat/${chatId}/messages`);
-        if (res.ok) {
-          const data = await res.json();
-          setMessages(data);
+      const data = await fetchMessages();
+      setMessages(data);
+      setLoading(false);
 
-          const initialMessage = searchParams.get("q");
-          if (initialMessage && data.length === 0 && !didSend) {
-            didSend = true;
-            window.history.replaceState({}, "", `/chat/${chatId}`);
-            setTimeout(() => sendMessageRef.current(initialMessage), 50);
-          }
-        }
-      } catch {
-        console.error("Failed to fetch messages");
-      } finally {
-        setLoading(false);
+      const initialMessage = searchParams.get("q");
+      if (initialMessage && data.length === 0 && !didSend) {
+        didSend = true;
+        window.history.replaceState({}, "", `/chat/${chatId}`);
+        setTimeout(() => sendMessageRef.current(initialMessage), 50);
       }
     };
 
     init();
-  }, [chatId, searchParams]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [chatId]);
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -150,7 +148,6 @@ export default function ChatPage() {
 
   return (
     <div className="flex h-full flex-col">
-      {/* Messages */}
       <div className="flex-1 overflow-y-auto px-4 py-6">
         {messages.length === 0 && !streaming ? (
           <div className="flex flex-col items-center justify-center h-full text-center">
@@ -172,7 +169,7 @@ export default function ChatPage() {
                 key={msg.id}
                 role={msg.role}
                 content={msg.content}
-                citations={msg.citations}
+                citations={msg.citations as Citation[] | undefined}
               />
             ))}
 
@@ -204,7 +201,6 @@ export default function ChatPage() {
         )}
       </div>
 
-      {/* Input */}
       <div className="border-t border-zinc-200 dark:border-zinc-800 px-4 py-4">
         <div className="max-w-3xl mx-auto">
           <ChatInput onSendAction={sendMessage} disabled={streaming} />
