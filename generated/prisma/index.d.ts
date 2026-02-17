@@ -6528,10 +6528,10 @@ export namespace Prisma {
     id: string
     userId: string
     name: string
-    fileUrl: string
+    fileUrl: string | null
     fileType: string
     fileSize: number
-    pageCount: number
+    pageCount: number | null
     chunkCount: number
     status: $Enums.DocumentStatus
     pineconeIds: string[]
@@ -6644,10 +6644,10 @@ export namespace Prisma {
       id: string
       userId: string
       name: string
-      fileUrl: string
+      fileUrl: string | null
       fileType: string
       fileSize: number
-      pageCount: number
+      pageCount: number | null
       chunkCount: number
       status: $Enums.DocumentStatus
       pineconeIds: string[]
@@ -13563,10 +13563,10 @@ export namespace Prisma {
     id?: StringFilter<"Document"> | string
     userId?: StringFilter<"Document"> | string
     name?: StringFilter<"Document"> | string
-    fileUrl?: StringFilter<"Document"> | string
+    fileUrl?: StringNullableFilter<"Document"> | string | null
     fileType?: StringFilter<"Document"> | string
     fileSize?: IntFilter<"Document"> | number
-    pageCount?: IntFilter<"Document"> | number
+    pageCount?: IntNullableFilter<"Document"> | number | null
     chunkCount?: IntFilter<"Document"> | number
     status?: EnumDocumentStatusFilter<"Document"> | $Enums.DocumentStatus
     pineconeIds?: StringNullableListFilter<"Document">
@@ -13580,10 +13580,10 @@ export namespace Prisma {
     id?: SortOrder
     userId?: SortOrder
     name?: SortOrder
-    fileUrl?: SortOrder
+    fileUrl?: SortOrderInput | SortOrder
     fileType?: SortOrder
     fileSize?: SortOrder
-    pageCount?: SortOrder
+    pageCount?: SortOrderInput | SortOrder
     chunkCount?: SortOrder
     status?: SortOrder
     pineconeIds?: SortOrder
@@ -13600,10 +13600,10 @@ export namespace Prisma {
     NOT?: DocumentWhereInput | DocumentWhereInput[]
     userId?: StringFilter<"Document"> | string
     name?: StringFilter<"Document"> | string
-    fileUrl?: StringFilter<"Document"> | string
+    fileUrl?: StringNullableFilter<"Document"> | string | null
     fileType?: StringFilter<"Document"> | string
     fileSize?: IntFilter<"Document"> | number
-    pageCount?: IntFilter<"Document"> | number
+    pageCount?: IntNullableFilter<"Document"> | number | null
     chunkCount?: IntFilter<"Document"> | number
     status?: EnumDocumentStatusFilter<"Document"> | $Enums.DocumentStatus
     pineconeIds?: StringNullableListFilter<"Document">
@@ -13617,10 +13617,10 @@ export namespace Prisma {
     id?: SortOrder
     userId?: SortOrder
     name?: SortOrder
-    fileUrl?: SortOrder
+    fileUrl?: SortOrderInput | SortOrder
     fileType?: SortOrder
     fileSize?: SortOrder
-    pageCount?: SortOrder
+    pageCount?: SortOrderInput | SortOrder
     chunkCount?: SortOrder
     status?: SortOrder
     pineconeIds?: SortOrder
@@ -13639,10 +13639,10 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"Document"> | string
     userId?: StringWithAggregatesFilter<"Document"> | string
     name?: StringWithAggregatesFilter<"Document"> | string
-    fileUrl?: StringWithAggregatesFilter<"Document"> | string
+    fileUrl?: StringNullableWithAggregatesFilter<"Document"> | string | null
     fileType?: StringWithAggregatesFilter<"Document"> | string
     fileSize?: IntWithAggregatesFilter<"Document"> | number
-    pageCount?: IntWithAggregatesFilter<"Document"> | number
+    pageCount?: IntNullableWithAggregatesFilter<"Document"> | number | null
     chunkCount?: IntWithAggregatesFilter<"Document"> | number
     status?: EnumDocumentStatusWithAggregatesFilter<"Document"> | $Enums.DocumentStatus
     pineconeIds?: StringNullableListFilter<"Document">
@@ -14243,10 +14243,10 @@ export namespace Prisma {
   export type DocumentCreateInput = {
     id?: string
     name: string
-    fileUrl: string
+    fileUrl?: string | null
     fileType: string
     fileSize: number
-    pageCount?: number
+    pageCount?: number | null
     chunkCount?: number
     status?: $Enums.DocumentStatus
     pineconeIds?: DocumentCreatepineconeIdsInput | string[]
@@ -14260,10 +14260,10 @@ export namespace Prisma {
     id?: string
     userId: string
     name: string
-    fileUrl: string
+    fileUrl?: string | null
     fileType: string
     fileSize: number
-    pageCount?: number
+    pageCount?: number | null
     chunkCount?: number
     status?: $Enums.DocumentStatus
     pineconeIds?: DocumentCreatepineconeIdsInput | string[]
@@ -14275,10 +14275,10 @@ export namespace Prisma {
   export type DocumentUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    fileUrl?: StringFieldUpdateOperationsInput | string
+    fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
     fileType?: StringFieldUpdateOperationsInput | string
     fileSize?: IntFieldUpdateOperationsInput | number
-    pageCount?: IntFieldUpdateOperationsInput | number
+    pageCount?: NullableIntFieldUpdateOperationsInput | number | null
     chunkCount?: IntFieldUpdateOperationsInput | number
     status?: EnumDocumentStatusFieldUpdateOperationsInput | $Enums.DocumentStatus
     pineconeIds?: DocumentUpdatepineconeIdsInput | string[]
@@ -14292,10 +14292,10 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    fileUrl?: StringFieldUpdateOperationsInput | string
+    fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
     fileType?: StringFieldUpdateOperationsInput | string
     fileSize?: IntFieldUpdateOperationsInput | number
-    pageCount?: IntFieldUpdateOperationsInput | number
+    pageCount?: NullableIntFieldUpdateOperationsInput | number | null
     chunkCount?: IntFieldUpdateOperationsInput | number
     status?: EnumDocumentStatusFieldUpdateOperationsInput | $Enums.DocumentStatus
     pineconeIds?: DocumentUpdatepineconeIdsInput | string[]
@@ -14308,10 +14308,10 @@ export namespace Prisma {
     id?: string
     userId: string
     name: string
-    fileUrl: string
+    fileUrl?: string | null
     fileType: string
     fileSize: number
-    pageCount?: number
+    pageCount?: number | null
     chunkCount?: number
     status?: $Enums.DocumentStatus
     pineconeIds?: DocumentCreatepineconeIdsInput | string[]
@@ -14321,10 +14321,10 @@ export namespace Prisma {
   export type DocumentUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    fileUrl?: StringFieldUpdateOperationsInput | string
+    fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
     fileType?: StringFieldUpdateOperationsInput | string
     fileSize?: IntFieldUpdateOperationsInput | number
-    pageCount?: IntFieldUpdateOperationsInput | number
+    pageCount?: NullableIntFieldUpdateOperationsInput | number | null
     chunkCount?: IntFieldUpdateOperationsInput | number
     status?: EnumDocumentStatusFieldUpdateOperationsInput | $Enums.DocumentStatus
     pineconeIds?: DocumentUpdatepineconeIdsInput | string[]
@@ -14335,10 +14335,10 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    fileUrl?: StringFieldUpdateOperationsInput | string
+    fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
     fileType?: StringFieldUpdateOperationsInput | string
     fileSize?: IntFieldUpdateOperationsInput | number
-    pageCount?: IntFieldUpdateOperationsInput | number
+    pageCount?: NullableIntFieldUpdateOperationsInput | number | null
     chunkCount?: IntFieldUpdateOperationsInput | number
     status?: EnumDocumentStatusFieldUpdateOperationsInput | $Enums.DocumentStatus
     pineconeIds?: DocumentUpdatepineconeIdsInput | string[]
@@ -16290,10 +16290,10 @@ export namespace Prisma {
   export type DocumentCreateWithoutUserInput = {
     id?: string
     name: string
-    fileUrl: string
+    fileUrl?: string | null
     fileType: string
     fileSize: number
-    pageCount?: number
+    pageCount?: number | null
     chunkCount?: number
     status?: $Enums.DocumentStatus
     pineconeIds?: DocumentCreatepineconeIdsInput | string[]
@@ -16305,10 +16305,10 @@ export namespace Prisma {
   export type DocumentUncheckedCreateWithoutUserInput = {
     id?: string
     name: string
-    fileUrl: string
+    fileUrl?: string | null
     fileType: string
     fileSize: number
-    pageCount?: number
+    pageCount?: number | null
     chunkCount?: number
     status?: $Enums.DocumentStatus
     pineconeIds?: DocumentCreatepineconeIdsInput | string[]
@@ -16466,10 +16466,10 @@ export namespace Prisma {
     id?: StringFilter<"Document"> | string
     userId?: StringFilter<"Document"> | string
     name?: StringFilter<"Document"> | string
-    fileUrl?: StringFilter<"Document"> | string
+    fileUrl?: StringNullableFilter<"Document"> | string | null
     fileType?: StringFilter<"Document"> | string
     fileSize?: IntFilter<"Document"> | number
-    pageCount?: IntFilter<"Document"> | number
+    pageCount?: IntNullableFilter<"Document"> | number | null
     chunkCount?: IntFilter<"Document"> | number
     status?: EnumDocumentStatusFilter<"Document"> | $Enums.DocumentStatus
     pineconeIds?: StringNullableListFilter<"Document">
@@ -16770,10 +16770,10 @@ export namespace Prisma {
   export type DocumentCreateWithoutChunksInput = {
     id?: string
     name: string
-    fileUrl: string
+    fileUrl?: string | null
     fileType: string
     fileSize: number
-    pageCount?: number
+    pageCount?: number | null
     chunkCount?: number
     status?: $Enums.DocumentStatus
     pineconeIds?: DocumentCreatepineconeIdsInput | string[]
@@ -16786,10 +16786,10 @@ export namespace Prisma {
     id?: string
     userId: string
     name: string
-    fileUrl: string
+    fileUrl?: string | null
     fileType: string
     fileSize: number
-    pageCount?: number
+    pageCount?: number | null
     chunkCount?: number
     status?: $Enums.DocumentStatus
     pineconeIds?: DocumentCreatepineconeIdsInput | string[]
@@ -16816,10 +16816,10 @@ export namespace Prisma {
   export type DocumentUpdateWithoutChunksInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    fileUrl?: StringFieldUpdateOperationsInput | string
+    fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
     fileType?: StringFieldUpdateOperationsInput | string
     fileSize?: IntFieldUpdateOperationsInput | number
-    pageCount?: IntFieldUpdateOperationsInput | number
+    pageCount?: NullableIntFieldUpdateOperationsInput | number | null
     chunkCount?: IntFieldUpdateOperationsInput | number
     status?: EnumDocumentStatusFieldUpdateOperationsInput | $Enums.DocumentStatus
     pineconeIds?: DocumentUpdatepineconeIdsInput | string[]
@@ -16832,10 +16832,10 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    fileUrl?: StringFieldUpdateOperationsInput | string
+    fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
     fileType?: StringFieldUpdateOperationsInput | string
     fileSize?: IntFieldUpdateOperationsInput | number
-    pageCount?: IntFieldUpdateOperationsInput | number
+    pageCount?: NullableIntFieldUpdateOperationsInput | number | null
     chunkCount?: IntFieldUpdateOperationsInput | number
     status?: EnumDocumentStatusFieldUpdateOperationsInput | $Enums.DocumentStatus
     pineconeIds?: DocumentUpdatepineconeIdsInput | string[]
@@ -17027,10 +17027,10 @@ export namespace Prisma {
   export type DocumentCreateWithoutCollectionsInput = {
     id?: string
     name: string
-    fileUrl: string
+    fileUrl?: string | null
     fileType: string
     fileSize: number
-    pageCount?: number
+    pageCount?: number | null
     chunkCount?: number
     status?: $Enums.DocumentStatus
     pineconeIds?: DocumentCreatepineconeIdsInput | string[]
@@ -17043,10 +17043,10 @@ export namespace Prisma {
     id?: string
     userId: string
     name: string
-    fileUrl: string
+    fileUrl?: string | null
     fileType: string
     fileSize: number
-    pageCount?: number
+    pageCount?: number | null
     chunkCount?: number
     status?: $Enums.DocumentStatus
     pineconeIds?: DocumentCreatepineconeIdsInput | string[]
@@ -17102,10 +17102,10 @@ export namespace Prisma {
   export type DocumentUpdateWithoutCollectionsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    fileUrl?: StringFieldUpdateOperationsInput | string
+    fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
     fileType?: StringFieldUpdateOperationsInput | string
     fileSize?: IntFieldUpdateOperationsInput | number
-    pageCount?: IntFieldUpdateOperationsInput | number
+    pageCount?: NullableIntFieldUpdateOperationsInput | number | null
     chunkCount?: IntFieldUpdateOperationsInput | number
     status?: EnumDocumentStatusFieldUpdateOperationsInput | $Enums.DocumentStatus
     pineconeIds?: DocumentUpdatepineconeIdsInput | string[]
@@ -17118,10 +17118,10 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    fileUrl?: StringFieldUpdateOperationsInput | string
+    fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
     fileType?: StringFieldUpdateOperationsInput | string
     fileSize?: IntFieldUpdateOperationsInput | number
-    pageCount?: IntFieldUpdateOperationsInput | number
+    pageCount?: NullableIntFieldUpdateOperationsInput | number | null
     chunkCount?: IntFieldUpdateOperationsInput | number
     status?: EnumDocumentStatusFieldUpdateOperationsInput | $Enums.DocumentStatus
     pineconeIds?: DocumentUpdatepineconeIdsInput | string[]
@@ -17370,10 +17370,10 @@ export namespace Prisma {
   export type DocumentCreateManyUserInput = {
     id?: string
     name: string
-    fileUrl: string
+    fileUrl?: string | null
     fileType: string
     fileSize: number
-    pageCount?: number
+    pageCount?: number | null
     chunkCount?: number
     status?: $Enums.DocumentStatus
     pineconeIds?: DocumentCreatepineconeIdsInput | string[]
@@ -17418,10 +17418,10 @@ export namespace Prisma {
   export type DocumentUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    fileUrl?: StringFieldUpdateOperationsInput | string
+    fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
     fileType?: StringFieldUpdateOperationsInput | string
     fileSize?: IntFieldUpdateOperationsInput | number
-    pageCount?: IntFieldUpdateOperationsInput | number
+    pageCount?: NullableIntFieldUpdateOperationsInput | number | null
     chunkCount?: IntFieldUpdateOperationsInput | number
     status?: EnumDocumentStatusFieldUpdateOperationsInput | $Enums.DocumentStatus
     pineconeIds?: DocumentUpdatepineconeIdsInput | string[]
@@ -17433,10 +17433,10 @@ export namespace Prisma {
   export type DocumentUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    fileUrl?: StringFieldUpdateOperationsInput | string
+    fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
     fileType?: StringFieldUpdateOperationsInput | string
     fileSize?: IntFieldUpdateOperationsInput | number
-    pageCount?: IntFieldUpdateOperationsInput | number
+    pageCount?: NullableIntFieldUpdateOperationsInput | number | null
     chunkCount?: IntFieldUpdateOperationsInput | number
     status?: EnumDocumentStatusFieldUpdateOperationsInput | $Enums.DocumentStatus
     pineconeIds?: DocumentUpdatepineconeIdsInput | string[]
@@ -17448,10 +17448,10 @@ export namespace Prisma {
   export type DocumentUncheckedUpdateManyWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    fileUrl?: StringFieldUpdateOperationsInput | string
+    fileUrl?: NullableStringFieldUpdateOperationsInput | string | null
     fileType?: StringFieldUpdateOperationsInput | string
     fileSize?: IntFieldUpdateOperationsInput | number
-    pageCount?: IntFieldUpdateOperationsInput | number
+    pageCount?: NullableIntFieldUpdateOperationsInput | number | null
     chunkCount?: IntFieldUpdateOperationsInput | number
     status?: EnumDocumentStatusFieldUpdateOperationsInput | $Enums.DocumentStatus
     pineconeIds?: DocumentUpdatepineconeIdsInput | string[]
