@@ -51,6 +51,9 @@ model User {
   name        String?
   image       String?
   password    String?
+  country     String?
+  state       String?
+  timezone    String?
   createdAt   DateTime     @default(now())
   documents   Document[]
   collections Collection[]

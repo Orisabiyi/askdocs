@@ -5101,6 +5101,9 @@ export namespace Prisma {
     name: string | null
     image: string | null
     password: string | null
+    country: string | null
+    state: string | null
+    timezone: string | null
     createdAt: Date | null
   }
 
@@ -5110,6 +5113,9 @@ export namespace Prisma {
     name: string | null
     image: string | null
     password: string | null
+    country: string | null
+    state: string | null
+    timezone: string | null
     createdAt: Date | null
   }
 
@@ -5119,6 +5125,9 @@ export namespace Prisma {
     name: number
     image: number
     password: number
+    country: number
+    state: number
+    timezone: number
     createdAt: number
     _all: number
   }
@@ -5130,6 +5139,9 @@ export namespace Prisma {
     name?: true
     image?: true
     password?: true
+    country?: true
+    state?: true
+    timezone?: true
     createdAt?: true
   }
 
@@ -5139,6 +5151,9 @@ export namespace Prisma {
     name?: true
     image?: true
     password?: true
+    country?: true
+    state?: true
+    timezone?: true
     createdAt?: true
   }
 
@@ -5148,6 +5163,9 @@ export namespace Prisma {
     name?: true
     image?: true
     password?: true
+    country?: true
+    state?: true
+    timezone?: true
     createdAt?: true
     _all?: true
   }
@@ -5230,6 +5248,9 @@ export namespace Prisma {
     name: string | null
     image: string | null
     password: string | null
+    country: string | null
+    state: string | null
+    timezone: string | null
     createdAt: Date
     _count: UserCountAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
@@ -5256,6 +5277,9 @@ export namespace Prisma {
     name?: boolean
     image?: boolean
     password?: boolean
+    country?: boolean
+    state?: boolean
+    timezone?: boolean
     createdAt?: boolean
     documents?: boolean | User$documentsArgs<ExtArgs>
     collections?: boolean | User$collectionsArgs<ExtArgs>
@@ -5271,6 +5295,9 @@ export namespace Prisma {
     name?: boolean
     image?: boolean
     password?: boolean
+    country?: boolean
+    state?: boolean
+    timezone?: boolean
     createdAt?: boolean
   }, ExtArgs["result"]["user"]>
 
@@ -5280,6 +5307,9 @@ export namespace Prisma {
     name?: boolean
     image?: boolean
     password?: boolean
+    country?: boolean
+    state?: boolean
+    timezone?: boolean
     createdAt?: boolean
   }, ExtArgs["result"]["user"]>
 
@@ -5289,10 +5319,13 @@ export namespace Prisma {
     name?: boolean
     image?: boolean
     password?: boolean
+    country?: boolean
+    state?: boolean
+    timezone?: boolean
     createdAt?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "name" | "image" | "password" | "createdAt", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "name" | "image" | "password" | "country" | "state" | "timezone" | "createdAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     documents?: boolean | User$documentsArgs<ExtArgs>
     collections?: boolean | User$collectionsArgs<ExtArgs>
@@ -5319,6 +5352,9 @@ export namespace Prisma {
       name: string | null
       image: string | null
       password: string | null
+      country: string | null
+      state: string | null
+      timezone: string | null
       createdAt: Date
     }, ExtArgs["result"]["user"]>
     composites: {}
@@ -5753,6 +5789,9 @@ export namespace Prisma {
     readonly name: FieldRef<"User", 'String'>
     readonly image: FieldRef<"User", 'String'>
     readonly password: FieldRef<"User", 'String'>
+    readonly country: FieldRef<"User", 'String'>
+    readonly state: FieldRef<"User", 'String'>
+    readonly timezone: FieldRef<"User", 'String'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
   }
     
@@ -13016,6 +13055,9 @@ export namespace Prisma {
     name: 'name',
     image: 'image',
     password: 'password',
+    country: 'country',
+    state: 'state',
+    timezone: 'timezone',
     createdAt: 'createdAt'
   };
 
@@ -13436,6 +13478,9 @@ export namespace Prisma {
     name?: StringNullableFilter<"User"> | string | null
     image?: StringNullableFilter<"User"> | string | null
     password?: StringNullableFilter<"User"> | string | null
+    country?: StringNullableFilter<"User"> | string | null
+    state?: StringNullableFilter<"User"> | string | null
+    timezone?: StringNullableFilter<"User"> | string | null
     createdAt?: DateTimeFilter<"User"> | Date | string
     documents?: DocumentListRelationFilter
     collections?: CollectionListRelationFilter
@@ -13450,6 +13495,9 @@ export namespace Prisma {
     name?: SortOrderInput | SortOrder
     image?: SortOrderInput | SortOrder
     password?: SortOrderInput | SortOrder
+    country?: SortOrderInput | SortOrder
+    state?: SortOrderInput | SortOrder
+    timezone?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     documents?: DocumentOrderByRelationAggregateInput
     collections?: CollectionOrderByRelationAggregateInput
@@ -13467,6 +13515,9 @@ export namespace Prisma {
     name?: StringNullableFilter<"User"> | string | null
     image?: StringNullableFilter<"User"> | string | null
     password?: StringNullableFilter<"User"> | string | null
+    country?: StringNullableFilter<"User"> | string | null
+    state?: StringNullableFilter<"User"> | string | null
+    timezone?: StringNullableFilter<"User"> | string | null
     createdAt?: DateTimeFilter<"User"> | Date | string
     documents?: DocumentListRelationFilter
     collections?: CollectionListRelationFilter
@@ -13481,6 +13532,9 @@ export namespace Prisma {
     name?: SortOrderInput | SortOrder
     image?: SortOrderInput | SortOrder
     password?: SortOrderInput | SortOrder
+    country?: SortOrderInput | SortOrder
+    state?: SortOrderInput | SortOrder
+    timezone?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     _count?: UserCountOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
@@ -13496,6 +13550,9 @@ export namespace Prisma {
     name?: StringNullableWithAggregatesFilter<"User"> | string | null
     image?: StringNullableWithAggregatesFilter<"User"> | string | null
     password?: StringNullableWithAggregatesFilter<"User"> | string | null
+    country?: StringNullableWithAggregatesFilter<"User"> | string | null
+    state?: StringNullableWithAggregatesFilter<"User"> | string | null
+    timezone?: StringNullableWithAggregatesFilter<"User"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
   }
 
@@ -14085,6 +14142,9 @@ export namespace Prisma {
     name?: string | null
     image?: string | null
     password?: string | null
+    country?: string | null
+    state?: string | null
+    timezone?: string | null
     createdAt?: Date | string
     documents?: DocumentCreateNestedManyWithoutUserInput
     collections?: CollectionCreateNestedManyWithoutUserInput
@@ -14099,6 +14159,9 @@ export namespace Prisma {
     name?: string | null
     image?: string | null
     password?: string | null
+    country?: string | null
+    state?: string | null
+    timezone?: string | null
     createdAt?: Date | string
     documents?: DocumentUncheckedCreateNestedManyWithoutUserInput
     collections?: CollectionUncheckedCreateNestedManyWithoutUserInput
@@ -14113,6 +14176,9 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    timezone?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     documents?: DocumentUpdateManyWithoutUserNestedInput
     collections?: CollectionUpdateManyWithoutUserNestedInput
@@ -14127,6 +14193,9 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    timezone?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     documents?: DocumentUncheckedUpdateManyWithoutUserNestedInput
     collections?: CollectionUncheckedUpdateManyWithoutUserNestedInput
@@ -14141,6 +14210,9 @@ export namespace Prisma {
     name?: string | null
     image?: string | null
     password?: string | null
+    country?: string | null
+    state?: string | null
+    timezone?: string | null
     createdAt?: Date | string
   }
 
@@ -14150,6 +14222,9 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    timezone?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -14159,6 +14234,9 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    timezone?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -14839,6 +14917,9 @@ export namespace Prisma {
     name?: SortOrder
     image?: SortOrder
     password?: SortOrder
+    country?: SortOrder
+    state?: SortOrder
+    timezone?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -14848,6 +14929,9 @@ export namespace Prisma {
     name?: SortOrder
     image?: SortOrder
     password?: SortOrder
+    country?: SortOrder
+    state?: SortOrder
+    timezone?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -14857,6 +14941,9 @@ export namespace Prisma {
     name?: SortOrder
     image?: SortOrder
     password?: SortOrder
+    country?: SortOrder
+    state?: SortOrder
+    timezone?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -16046,6 +16133,9 @@ export namespace Prisma {
     name?: string | null
     image?: string | null
     password?: string | null
+    country?: string | null
+    state?: string | null
+    timezone?: string | null
     createdAt?: Date | string
     documents?: DocumentCreateNestedManyWithoutUserInput
     collections?: CollectionCreateNestedManyWithoutUserInput
@@ -16059,6 +16149,9 @@ export namespace Prisma {
     name?: string | null
     image?: string | null
     password?: string | null
+    country?: string | null
+    state?: string | null
+    timezone?: string | null
     createdAt?: Date | string
     documents?: DocumentUncheckedCreateNestedManyWithoutUserInput
     collections?: CollectionUncheckedCreateNestedManyWithoutUserInput
@@ -16088,6 +16181,9 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    timezone?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     documents?: DocumentUpdateManyWithoutUserNestedInput
     collections?: CollectionUpdateManyWithoutUserNestedInput
@@ -16101,6 +16197,9 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    timezone?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     documents?: DocumentUncheckedUpdateManyWithoutUserNestedInput
     collections?: CollectionUncheckedUpdateManyWithoutUserNestedInput
@@ -16114,6 +16213,9 @@ export namespace Prisma {
     name?: string | null
     image?: string | null
     password?: string | null
+    country?: string | null
+    state?: string | null
+    timezone?: string | null
     createdAt?: Date | string
     documents?: DocumentCreateNestedManyWithoutUserInput
     collections?: CollectionCreateNestedManyWithoutUserInput
@@ -16127,6 +16229,9 @@ export namespace Prisma {
     name?: string | null
     image?: string | null
     password?: string | null
+    country?: string | null
+    state?: string | null
+    timezone?: string | null
     createdAt?: Date | string
     documents?: DocumentUncheckedCreateNestedManyWithoutUserInput
     collections?: CollectionUncheckedCreateNestedManyWithoutUserInput
@@ -16156,6 +16261,9 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    timezone?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     documents?: DocumentUpdateManyWithoutUserNestedInput
     collections?: CollectionUpdateManyWithoutUserNestedInput
@@ -16169,6 +16277,9 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    timezone?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     documents?: DocumentUncheckedUpdateManyWithoutUserNestedInput
     collections?: CollectionUncheckedUpdateManyWithoutUserNestedInput
@@ -16486,6 +16597,9 @@ export namespace Prisma {
     name?: string | null
     image?: string | null
     password?: string | null
+    country?: string | null
+    state?: string | null
+    timezone?: string | null
     createdAt?: Date | string
     collections?: CollectionCreateNestedManyWithoutUserInput
     chats?: ChatCreateNestedManyWithoutUserInput
@@ -16499,6 +16613,9 @@ export namespace Prisma {
     name?: string | null
     image?: string | null
     password?: string | null
+    country?: string | null
+    state?: string | null
+    timezone?: string | null
     createdAt?: Date | string
     collections?: CollectionUncheckedCreateNestedManyWithoutUserInput
     chats?: ChatUncheckedCreateNestedManyWithoutUserInput
@@ -16572,6 +16689,9 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    timezone?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     collections?: CollectionUpdateManyWithoutUserNestedInput
     chats?: ChatUpdateManyWithoutUserNestedInput
@@ -16585,6 +16705,9 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    timezone?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     collections?: CollectionUncheckedUpdateManyWithoutUserNestedInput
     chats?: ChatUncheckedUpdateManyWithoutUserNestedInput
@@ -16726,6 +16849,9 @@ export namespace Prisma {
     name?: string | null
     image?: string | null
     password?: string | null
+    country?: string | null
+    state?: string | null
+    timezone?: string | null
     createdAt?: Date | string
     documents?: DocumentCreateNestedManyWithoutUserInput
     chats?: ChatCreateNestedManyWithoutUserInput
@@ -16739,6 +16865,9 @@ export namespace Prisma {
     name?: string | null
     image?: string | null
     password?: string | null
+    country?: string | null
+    state?: string | null
+    timezone?: string | null
     createdAt?: Date | string
     documents?: DocumentUncheckedCreateNestedManyWithoutUserInput
     chats?: ChatUncheckedCreateNestedManyWithoutUserInput
@@ -16814,6 +16943,9 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    timezone?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     documents?: DocumentUpdateManyWithoutUserNestedInput
     chats?: ChatUpdateManyWithoutUserNestedInput
@@ -16827,6 +16959,9 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    timezone?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     documents?: DocumentUncheckedUpdateManyWithoutUserNestedInput
     chats?: ChatUncheckedUpdateManyWithoutUserNestedInput
@@ -17000,6 +17135,9 @@ export namespace Prisma {
     name?: string | null
     image?: string | null
     password?: string | null
+    country?: string | null
+    state?: string | null
+    timezone?: string | null
     createdAt?: Date | string
     documents?: DocumentCreateNestedManyWithoutUserInput
     collections?: CollectionCreateNestedManyWithoutUserInput
@@ -17013,6 +17151,9 @@ export namespace Prisma {
     name?: string | null
     image?: string | null
     password?: string | null
+    country?: string | null
+    state?: string | null
+    timezone?: string | null
     createdAt?: Date | string
     documents?: DocumentUncheckedCreateNestedManyWithoutUserInput
     collections?: CollectionUncheckedCreateNestedManyWithoutUserInput
@@ -17091,6 +17232,9 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    timezone?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     documents?: DocumentUpdateManyWithoutUserNestedInput
     collections?: CollectionUpdateManyWithoutUserNestedInput
@@ -17104,6 +17248,9 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    timezone?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     documents?: DocumentUncheckedUpdateManyWithoutUserNestedInput
     collections?: CollectionUncheckedUpdateManyWithoutUserNestedInput

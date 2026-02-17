@@ -10,5 +10,6 @@ export const config = {
     "/chat/:path*",
     "/documents/:path*",
     "/collections/:path*",
+    "/onboarding/:path*",
   ],
 };
