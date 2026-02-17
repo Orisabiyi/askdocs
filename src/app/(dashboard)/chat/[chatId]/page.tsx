@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { useParams } from "next/navigation";
+import { useParams, useSearchParams } from "next/navigation";
 import MessageBubble from "@/components/chat/message-bubble";
 import ChatInput from "@/components/chat/chat-input";
 import { Loader2, FileText } from "lucide-react";
@@ -17,38 +17,17 @@ interface Message {
 
 export default function ChatPage() {
   const { chatId } = useParams<{ chatId: string }>();
+  const searchParams = useSearchParams();
   const [messages, setMessages] = useState<Message[]>([]);
   const [loading, setLoading] = useState(true);
   const [streaming, setStreaming] = useState(false);
   const [streamingContent, setStreamingContent] = useState("");
-  const [streamingCitations, setStreamingCitations] = useState<Citation[]>([]);
   const bottomRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const fetchMessages = async () => {
-      setLoading(true);
-      try {
-        const res = await fetch(`/api/chat/${chatId}/messages`);
-        if (res.ok) {
-          const data = await res.json();
-          setMessages(data);
-        }
-      } catch {
-        console.error("Failed to fetch messages");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchMessages();
-  }, [chatId]);
-
-  useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages, streamingContent]);
+  const sendMessageRef = useRef<(content: string) => Promise<void>>(
+    async () => { }
+  );
 
   const sendMessage = async (content: string) => {
-    // Add user message immediately
     const userMessage: Message = {
       id: `temp-${Date.now()}`,
       role: "USER",
@@ -58,7 +37,6 @@ export default function ChatPage() {
     setMessages((prev) => [...prev, userMessage]);
     setStreaming(true);
     setStreamingContent("");
-    setStreamingCitations([]);
 
     try {
       const res = await fetch(`/api/chat/${chatId}/messages`, {
@@ -74,6 +52,7 @@ export default function ChatPage() {
       const reader = res.body.getReader();
       const decoder = new TextDecoder();
       let fullContent = "";
+      let finalCitations: Citation[] = [];
 
       while (true) {
         const { done, value } = await reader.read();
@@ -97,7 +76,7 @@ export default function ChatPage() {
             }
 
             if (parsed.citations) {
-              setStreamingCitations(parsed.citations);
+              finalCitations = parsed.citations;
             }
 
             if (parsed.error) {
@@ -109,14 +88,13 @@ export default function ChatPage() {
         }
       }
 
-      // Replace streaming with final message
       setMessages((prev) => [
         ...prev,
         {
           id: `assistant-${Date.now()}`,
           role: "ASSISTANT",
           content: fullContent,
-          citations: JSON.parse(JSON.stringify(streamingCitations)),
+          citations: finalCitations,
           createdAt: new Date().toISOString(),
         },
       ]);
@@ -125,9 +103,42 @@ export default function ChatPage() {
     } finally {
       setStreaming(false);
       setStreamingContent("");
-      setStreamingCitations([]);
     }
   };
+
+  sendMessageRef.current = sendMessage;
+
+  useEffect(() => {
+    let didSend = false;
+
+    const init = async () => {
+      setLoading(true);
+      try {
+        const res = await fetch(`/api/chat/${chatId}/messages`);
+        if (res.ok) {
+          const data = await res.json();
+          setMessages(data);
+
+          const initialMessage = searchParams.get("q");
+          if (initialMessage && data.length === 0 && !didSend) {
+            didSend = true;
+            window.history.replaceState({}, "", `/chat/${chatId}`);
+            setTimeout(() => sendMessageRef.current(initialMessage), 50);
+          }
+        }
+      } catch {
+        console.error("Failed to fetch messages");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    init();
+  }, [chatId, searchParams]);
+
+  useEffect(() => {
+    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages, streamingContent]);
 
   if (loading) {
     return (
@@ -165,7 +176,6 @@ export default function ChatPage() {
               />
             ))}
 
-            {/* Streaming message */}
             {streaming && streamingContent && (
               <MessageBubble
                 role="ASSISTANT"
@@ -174,7 +184,6 @@ export default function ChatPage() {
               />
             )}
 
-            {/* Loading indicator */}
             {streaming && !streamingContent && (
               <div className="flex gap-3">
                 <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900">

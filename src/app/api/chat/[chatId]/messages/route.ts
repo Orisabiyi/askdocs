@@ -1,7 +1,7 @@
 import { auth } from "@/lib/auth";
 import prisma from "@/lib/prisma";
 import { retrieveRelevantChunks, buildRAGPrompt } from "@/lib/rag";
-import { genAI } from "@/lib/gemini";
+import { geminiChatModel } from "@/lib/gemini";
 import type { Citation } from "@/types/chat";
 
 // GET - fetch messages for a chat
@@ -122,13 +122,7 @@ export async function POST(
       parts: [{ text: msg.content }],
     }));
 
-    // Stream response from Gemini with Google Search grounding
-    const model = genAI.getGenerativeModel({
-      model: "gemini-2.0-flash",
-      tools: [{ googleSearch: {} } as unknown as import("@google/generative-ai").Tool],
-    });
-
-    const chatSession = model.startChat({
+    const chatSession = geminiChatModel.startChat({
       history: geminiHistory,
     });
 

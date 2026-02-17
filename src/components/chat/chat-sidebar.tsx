@@ -16,11 +16,10 @@ export default function ChatSidebar() {
   const pathname = usePathname();
   const [chats, setChats] = useState<Chat[]>([]);
   const [loading, setLoading] = useState(true);
-  const [creating, setCreating] = useState(false);
 
   useEffect(() => {
     fetchChats();
-  }, []);
+  }, [pathname]);
 
   const fetchChats = async () => {
     try {
@@ -36,40 +35,15 @@ export default function ChatSidebar() {
     }
   };
 
-  const createChat = async () => {
-    setCreating(true);
-    try {
-      const res = await fetch("/api/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ title: "New Chat" }),
-      });
-      if (res.ok) {
-        const chat = await res.json();
-        setChats((prev) => [chat, ...prev]);
-        router.push(`/chat/${chat.id}`);
-      }
-    } catch {
-      console.error("Failed to create chat");
-    } finally {
-      setCreating(false);
-    }
-  };
-
   const activeChatId = pathname.split("/chat/")[1];
 
   return (
     <div className="flex flex-col h-full">
       <button
-        onClick={createChat}
-        disabled={creating}
-        className="flex items-center gap-2 rounded-md border border-zinc-200 dark:border-zinc-800 px-3 py-2 text-sm text-zinc-600 dark:text-zinc-400 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors disabled:opacity-50 mx-3 mt-3"
+        onClick={() => router.push("/chat")}
+        className="flex items-center gap-2 rounded-md border border-zinc-200 dark:border-zinc-800 px-3 py-2 text-sm text-zinc-600 dark:text-zinc-400 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors mx-3 mt-3"
       >
-        {creating ? (
-          <Loader2 className="h-3.5 w-3.5 animate-spin" />
-        ) : (
-          <Plus className="h-3.5 w-3.5" />
-        )}
+        <Plus className="h-3.5 w-3.5" />
         New Chat
       </button>
 

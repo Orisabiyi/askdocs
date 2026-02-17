@@ -52,7 +52,7 @@ export default function DocumentsPage() {
   };
 
   return (
-    <div className="max-w-3xl mx-auto space-y-8">
+    <div className="max-w-3xl mx-auto space-y-8 p-6">
       <div>
         <h1 className="text-lg font-semibold text-zinc-900 dark:text-zinc-100">
           Documents

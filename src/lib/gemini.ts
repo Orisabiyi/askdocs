@@ -10,9 +10,12 @@ export const geminiModel = genAI.getGenerativeModel({
   model: "gemini-2.5-flash",
 });
 
-export const embeddingModel = genAI.getGenerativeModel({
-  model: "text-embedding-004",
+export const geminiChatModel = genAI.getGenerativeModel({
+  model: "gemini-2.5-flash",
+  tools: [{ googleSearch: {} } as Record<string, unknown>],
 });
+
+export const embeddingModel = genAI.getGenerativeModel({ model: "gemini-embedding-001" });
 
 export async function generateEmbedding(text: string): Promise<number[]> {
   const result = await embeddingModel.embedContent(text);
